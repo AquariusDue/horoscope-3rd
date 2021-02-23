@@ -3,12 +3,18 @@ import json
 
 app = Flask(__name__)
 
-# TODO: Data is stored in memory, once the file is updated by the scraper the in-memory api data falls behind
-# try route middleware?
-with open('../horoscopes.json', 'r') as f:
-    horoscopes = json.load(f)
+def get_horoscopes(h_sign):
+    with open('../horoscopes.json', 'r') as f:
+        horoscopes = json.load(f)
+        
+        if h_sign in horoscopes:
+            return horoscopes.get(h_sign)
+        else:
+            return "Error: Not a valid astrological sign"
 
+@app.route('/horoscope/<h_sign>')
+def send_horoscope(h_sign):
+    horoscope = get_horoscopes(h_sign)
+    return horoscope
 
-@app.route('/')
-def hello_world():
-    return horoscopes.get('taur') 
+#TODO: Better error-checking, current version is inadequate.
