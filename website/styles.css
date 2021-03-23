@@ -72,3 +72,17 @@ select {
     scroll-behavior: auto !important;
   }
 }
+
+#content {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
+#title {
+  align-self: center;
+}
+
+#horoscope-info {
+  align-self: center;
+}
